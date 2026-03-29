@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam Manoj Philip — Brand Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1410;
+    --rust: #C4562A;
+    --gold: #D4A847;
+    --slate: #6B6560;
+    --light: #EDE8DF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* LOGO ICON */
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--rust);
+    display: inline-block;
+    margin-right: 12px;
+    position: relative;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 4rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(26,20,16,0.08);
+  }
+  .nav-brand { display: flex; align-items: center; text-decoration: none; color: var(--ink); }
+  .nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 6rem 4rem; position: relative; }
+  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rust); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.0; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+  .hero-name em { font-style: italic; color: var(--rust); }
+  .hero-desc { font-size: 1.05rem; line-height: 1.75; color: var(--slate); max-width: 440px; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--ink); color: var(--cream); padding: 1rem 2rem; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; width: fit-content; }
+  .hero-cta:hover { background: var(--rust); gap: 1.25rem; transform: translateY(-2px); }
+  
+  .hero-right { background: var(--ink); position: relative; overflow: hidden; display: flex; align-items: flex-end; justify-content: flex-start; padding: 4rem; }
+  .hero-right::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(196,86,42,0.25) 0%, transparent 65%); }
+  
+  .hero-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 100%; opacity: 0; animation: fadeUp 1s 1s forwards; z-index: 2; }
+  .stat-card { background: rgba(245,240,232,0.06); padding: 2rem; border: 1px solid rgba(245,240,232,0.08); }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--cream); line-height: 1; }
+  .stat-number span { color: var(--rust); }
+  .stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.45); margin-top: 0.5rem; }
+
+  /* SECTION SHARED */
+  section { padding: 7rem 4rem; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rust); margin-bottom: 1rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 3.5rem; }
+
+  /* EXPERIENCE */
+  .experience { background: var(--light); }
+  .exp-grid { display: grid; gap: 2px; }
+  .exp-card { background: var(--cream); padding: 3.5rem; display: grid; grid-template-columns: 280px 1fr; gap: 4rem; transition: all 0.3s; }
+  .exp-card:hover { background: #fff; transform: scale(1.01); }
+  .exp-company { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .exp-role { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.5rem; }
+  .exp-period { font-size: 0.85rem; color: var(--slate); font-weight: 500; }
+  .exp-body { border-left: 1px solid rgba(26,20,16,0.1); padding-left: 4rem; }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .exp-points li { font-size: 0.98rem; line-height: 1.7; color: var(--slate); position: relative; }
+  .exp-points li::before { content: '→'; position: absolute; left: -25px; color: var(--rust); }
+  .exp-clients { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .client-tag { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.9rem; border: 1px solid rgba(26,20,16,0.15); color: var(--ink); font-weight: 500; }
+
+  /* ACHIEVEMENTS */
+  .achievements { background: var(--ink); color: var(--cream); }
+  .ach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .ach-card { background: rgba(245,240,232,0.03); border: 1px solid rgba(245,240,232,0.07); padding: 3.5rem; position: relative; transition: all 0.3s; }
+  .ach-card:hover { background: rgba(245,240,232,0.06); transform: translateY(-5px); border-color: var(--rust); }
+  .ach-num { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900; color: rgba(245,240,232,0.04); position: absolute; top: 1.5rem; right: 2rem;
