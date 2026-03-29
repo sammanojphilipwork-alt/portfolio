@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam Manoj Philip — Brand Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1410;
+    --rust: #C4562A;
+    --gold: #D4A847;
+    --slate: #6B6560;
+    --light: #EDE8DF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(26,20,16,0.08);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 4rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--rust);
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--slate);
+    max-width: 440px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, gap 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+    width: fit-content;
+  }
+  .hero-cta:hover { background: var(--rust); gap: 1.25rem; }
+  .hero-right {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 4rem;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(196,86,42,0.25) 0%, transparent 65%);
+  }
+  .hero-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+  .stat-card {
+    background: rgba(245,240,232,0.06);
+    padding: 2rem;
+    border: 1px solid rgba(245,240,232,0.08);
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .stat-number span { color: var(--rust); }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+    margin-top: 0.5rem;
+  }
+  .big-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 11rem;
+    font-weight: 900;
+    color: rgba(245,240,232,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+
+  /* SECTION SHARED */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 3rem;
+  }
+
+  /* EXPERIENCE */
+  .experience { background: var(--light); }
+  .exp-grid { display: grid; gap: 2px; }
+  .exp-card {
+    background: var(--cream);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 3rem;
+    transition: background 0.2s;
+  }
+  .exp-card:hover { background: #fff; }
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .exp-role {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+  .exp-period {
+    font-size: 0.8rem;
+    color: var(--slate);
+  }
+  .exp-body { padding-left: 3rem; }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .exp-points li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--slate);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .exp-points li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+  }
+  .exp-clients {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .client-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(26,20,16,0.2);
+    color: var(--ink);
+  }
+
+  /* ACHIEVEMENTS */
+  .achievements { background: var(--ink); color: var(--cream); }
+  .achievements .section-title { color: var(--cream); }
+  .ach-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .ach-card {
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.07);
+    padding: 3rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .ach-card:hover { background: rgba(245,240,232,0.08); }
+  .ach-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(245,240,232,0.06);
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    line-height: 1;
+  }
+  .ach-icon { font-size: 1.5rem; margin-bottom: 1.5rem; }
+  .ach-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .ach-desc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: rgba(245,240,232,0.55);
+  }
+
+  /* SKILLS */
+  .skills-section { background: var(--cream); }
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .skill-group-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(26,20,16,0.08);
+  }
+  .skill-name { font-size: 0.95rem; }
+  .skill-bar-wrap {
+    width: 120px;
+    height: 2px;
+    background: rgba(26,20,16,0.1);
+    position: relative;
+  }
+  .skill-bar {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: var(--rust);
+    transition: width 1s ease;
+  }
+  .cert-card {
+    background: var(--light);
+    padding: 2.5rem;
+    border-left: 3px solid var(--rust);
+    margin-top: 1rem;
+  }
+  .cert-issuer {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+  .cert-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .cert-skills {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* EDUCATION */
+  .education { background: var(--light); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .edu-card {
+    background: var(--cream);
+    padding: 3rem;
+  }
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .edu-inst {
+    font-size: 0.9rem;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+
+  /* CONTACT */
+  .contact { background: var(--rust); color: var(--cream); text-align: center; }
+  .contact .section-label { color: rgba(245,240,232,0.6); }
+  .contact .section-title { color: var(--cream); max-width: 600px; margin: 0 auto 3rem; }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(245,240,232,0.85);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid rgba(245,240,232,0.3);
+    transition: background 0.2s, color 0.2s;
+  }
+  .contact-link:hover {
+    background: rgba(245,240,232,0.15);
+    color: var(--cream);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(245,240,232,0.35);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 40vh; }
+    .hero-left { padding: 4rem 2rem 3rem; }
+    section { padding: 5rem 2rem; }
+    .exp-card { grid-template-columns: 1fr; gap: 1.5rem; }
+    .exp-body { padding-left: 0; }
+    .ach-grid { grid-template-columns: 1fr; }
+    .skills-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Sam Manoj Philip</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#achievements">Impact</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" style="padding:0">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Brand Strategist · Account Executive</p>
+    <h1 class="hero-name">Sam<br>Manoj<br><em>Philip</em></h1>
+    <p class="hero-desc">Marketing strategist and business developer driving brand growth and measurable impact for FMCG and retail clients across Kerala and beyond.</p>
+    <a href="#contact" class="hero-cta">Get in Touch →</a>
+  </div>
+  <div class="hero-right">
+    <div class="big-text">BRAND</div>
+    <div class="hero-stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">3.2<span>K+</span></div>
+        <div class="stat-label">Instagram Followers Grown</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8<span>+</span></div>
+        <div class="stat-label">Major Brands Led</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2<span>x</span></div>
+        <div class="stat-label">Agency Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">360<span>°</span></div>
+        <div class="stat-label">Campaign Execution</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience reveal" id="experience">
+  <div style="max-width:1100px; margin:0 auto">
+    <p class="section-label">Work Experience</p>
+    <h2 class="section-title">Where I've<br>Made an Impact</h2>
+
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-company">Passsio<br>Communications</div>
+          <div class="exp-role">Account Executive</div>
+          <div class="exp-period">Current Role</div>
+          <div class="exp-clients" style="margin-top:1.5rem">
+            <span class="client-tag">Camerry</span>
+            <span class="client-tag">Reliance Smart Bazaar</span>
+            <span class="client-tag">PRAN Drinko Float</span>
+            <span class="client-tag">EasyStore</span>
+          </div>
+        </div>
+        <div style="width:1px;background:rgba(26,20,16,0.1);margin:-3rem 0;"></div>
+        <div class="exp-body">
+          <ul class="exp-points">
+            <li>Lead brand strategy and marketing communication planning across FMCG and retail clients.</li>
+            <li>Act as a key strategic partner, aligning brand communication with business growth objectives.</li>
+            <li>Support business development through idea pitching, proposal creation, and identifying new opportunities.</li>
+            <li>Manage end-to-end client relationships: briefs, strategy discussions, and delivery.</li>
+            <li>Coordinate cross-functional teams for effective campaign execution.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <div class="exp-company">Poptale Integrated Creative</div>
+          <div class="exp-role">Brand Manager</div>
+          <div class="exp-period">Previous Role</div>
+          <div class="exp-clients" style="margin-top:1.5rem">
+            <span class="client-tag">Aster Medcity</span>
+            <span class="client-tag">Francis Alukkas</span>
+            <span class="client-tag">Kitchen Treasures</span>
+            <span class="client-tag">Sunny Diamonds</span>
+            <span class="client-tag">PillsNow</span>
+          </div>
+        </div>
+        <div style="width:1px;background:rgba(26,20,16,0.1);margin:-3rem 0;"></div>
+        <div class="exp-body">
+          <ul class="exp-points">
+            <li>Executed campaign strategies for high-profile healthcare, jewellery, and FMCG brands.</li>
+            <li>Managed end-to-end brand positioning: research, creative concepting, and performance tracking.</li>
+            <li>Led ad film productions managing the full journey from idea to execution.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="achievements reveal" id="achievements">
+  <div style="max-width:1100px; margin:0 auto">
+    <p class="section-label" style="color:rgba(245,240,232,0.5)">Key Achievements</p>
+    <h2 class="section-title">Results That<br>Speak Louder</h2>
+    <div class="ach-grid">
+      <div class="ach-card">
+        <div class="ach-num">01</div>
+        <div class="ach-icon">📈</div>
+        <div class="ach-title">Zero to 3,200+ Instagram Followers</div>
+        <div class="ach-desc">Grew Drinko Float Kerala's Instagram from scratch through pure strategy and sharp content positioning.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">02</div>
+        <div class="ach-icon">🪧</div>
+        <div class="ach-title">Francis Alukkas Billboard Campaign</div>
+        <div class="ach-desc">Contributed to the "Your Story Forever Bright" campaign taking brand communication to large-scale public visibility.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills-section reveal" id="skills">
+  <div style="max-width:1100px; margin:0 auto">
+    <p class="section-label">Skills & Expertise</p>
+    <h2 class="section-title">What I Bring<br>to the Table</h2>
+    <div class="skills-layout">
+      <div>
+        <p class="skill-group-title">Marketing & Strategy</p>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <span class="skill-name">Brand Management & Positioning</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Campaign Development & Execution</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="cert-card">
+          <div class="cert-issuer">KPMG</div>
+          <div class="cert-name">Data Analytics & Business Intelligence</div>
+          <div class="cert-skills">Advanced Excel · R · SQL · Machine Learning · Power BI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact reveal" id="contact" style="padding:6rem 4rem">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Let's Build Something<br>Remarkable Together</h2>
+  <div class="contact-links">
+    <a href="mailto:sammanojphilip.work@gmail.com" class="contact-link">
+      ✉ sammanojphilip.work@gmail.com
+    </a>
+    <a href="tel:+918590178852" class="contact-link">
+      📞 +91 85901 78852
+    </a>
+    <a href="https://linkedin.com/in/sam-manoj-philip" target="_blank" class="contact-link">
+      in LinkedIn Profile
+    </a>
+  </div>
+</section>
+
+<footer>© 2026 Sam Manoj Philip · Brand Strategist · Kerala, India</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
